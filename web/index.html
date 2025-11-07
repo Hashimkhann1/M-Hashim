@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="M Hashim - Flutter Developer Portfolio">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="M Hashim Portfolio">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>M Hashim - Flutter Developer</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0F172A;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    /* Loading Screen Container */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    /* Logo Container */
+    .logo-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 40px;
+      animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Animated Circle Border */
+    .circle-border {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366F1, #9333EA);
+      padding: 4px;
+      animation: rotate 3s linear infinite;
+    }
+
+    .circle-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .initials {
+      font-size: 48px;
+      font-weight: bold;
+      color: #FFFFFF;
+      letter-spacing: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Loading Text */
+    .loading-text {
+      color: #CBD5E1;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-out;
+      letter-spacing: 1px;
+    }
+
+    /* Progress Bar Container */
+    .progress-container {
+      width: 280px;
+      height: 6px;
+      background: #1E293B;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #6366F1, #9333EA, #6366F1);
+      background-size: 200% 100%;
+      border-radius: 10px;
+      animation: loading 2s ease-in-out forwards, shimmer 1.5s linear infinite;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #6366F1;
+      border-radius: 50%;
+      opacity: 0;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) {
+      top: 20%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      top: 40%;
+      left: 80%;
+      animation-delay: 0.5s;
+    }
+
+    .particle:nth-child(3) {
+      top: 60%;
+      left: 30%;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(4) {
+      top: 80%;
+      left: 70%;
+      animation-delay: 1.5s;
+    }
+
+    .particle:nth-child(5) {
+      top: 30%;
+      left: 50%;
+      animation-delay: 2s;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        width: 0%;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      25% {
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-30px) translateX(20px);
+        opacity: 1;
+      }
+      75% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-60px) translateX(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    /* Hide loading screen after Flutter loads */
+    .loaded #loading-screen {
+      animation: fadeOut 0.5s ease-out forwards;
+      pointer-events: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .logo-container {
+        width: 100px;
+        height: 100px;
+      }
+
+      .initials {
+        font-size: 40px;
+      }
+
+      .loading-text {
+        font-size: 20px;
+      }
+
+      .progress-container {
+        width: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <!-- Floating Particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <div class="circle-border">
+      <div class="circle-inner">
+        <div class="initials">MH</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Text -->
+  <div class="loading-text">Loading Portfolio...</div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
+</div>
+
+<script>
+  // Hide loading screen when Flutter is ready
+  window.addEventListener('flutter-first-frame', function() {
+    setTimeout(function() {
+      document.body.classList.add('loaded');
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.display = 'none';
+      }, 500);
+    }, 500);
+  });
+
+  // Fallback: Hide loading screen after 5 seconds if Flutter doesn't load
+  setTimeout(function() {
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.display = 'none';
+      }, 500);
+    }
+  }, 5000);
+</script>
+
+<script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
